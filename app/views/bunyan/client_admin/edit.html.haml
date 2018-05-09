@@ -16,7 +16,7 @@
 
 
 	.row
-		.col-xs-8
+		.col-xs-6
 			%h2
 				Events
 			%table.table
@@ -28,7 +28,8 @@
 					- @client.events.each do |event|
 						%tr
 							%td
-								= event.name
+								%a{ href: edit_event_admin_path( event ) }
+									= event.name
 							%td
 								= event.created_at
 							%td
@@ -36,18 +37,121 @@
 
 
 
-		.col-xs-4
+		.col-xs-6
 			.well
 				%h3
 					Client Details
-				Device: 
-				= @client.to_s
+				%table.table
 
-				%br
+					%tr
+						%td
+							Device: 
+						%td
+							= @client.to_s
+
+					%tr
+						%td
+							Created: 
+						%td
+							= @client.created_at
+
+					%tr
+						%td
+							IP: 
+						%td
+							= @client.ip
+					%tr
+						%td
+							UserAgent: 
+						%td
+							= @client.user_agent
+					%tr
+						%td
+							Location
+						%td
+							= "#{@client.country}, #{@client.state}, #{@client.city}"
+					%tr
+						%td
+							Referrer URL: 
+						%td
+							= @client.referrer_url
+					%tr
+						%td
+							Referrer host: 
+						%td
+							= @client.referrer_host
+					%tr
+						%td
+							Referrer Path: 
+						%td
+							= @client.referrer_path
+					%tr
+						%td
+							Landing Page URL: 
+						%td
+							= @client.lander_url
+					%tr
+						%td
+							Landing Page host: 
+						%td
+							= @client.lander_host
+					%tr
+						%td
+							Landing Page Path: 
+						%td
+							= @client.lander_path
+
+					%tr
+						%td
+							Campaign Source: 
+						%td
+							= @client.campaign_source
+					%tr
+						%td
+							Campaign Medium: 
+						%td
+							= @client.campaign_medium
+					%tr
+						%td
+							Campaign Term: 
+						%td
+							= @client.campaign_term
+					%tr
+						%td
+							Campaign Content: 
+						%td
+							= @client.campaign_content
+					%tr
+						%td
+							Campaign Name: 
+						%td
+							= @client.campaign_name
+					%tr
+						%td
+							Campaign Cost: 
+						%td
+							= @client.campaign_cost
 				
-				Created: 
-				= @client.created_at
 
-				%br
+					%tr
+						%td
+							Device: 
+						%td
+							= @client.device_family
+							= @client.device_brand
+							= @client.device_model
+					%tr
+						%td
+							OS: 
+						%td
+							= @client.os_name
+							= @client.os_version
+
+					%tr
+						%td
+							Browser: 
+						%td
+							= @client.browser_family
+							= @client.browser_version
 
 

@@ -43,7 +43,8 @@
 								%td
 									= event.name
 								%td
-									= event.to_s
+									%a{ href: edit_event_admin_path( event ) }
+										= event.to_s
 								%td
 									= time_ago_in_words event.created_at
 									ago

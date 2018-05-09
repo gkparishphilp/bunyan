@@ -12,13 +12,13 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:state
 			t.string		:city
 
-			t.string		:landing_page_referrer_url
-			t.string		:landing_page_referrer_host
-			t.string		:landing_page_referrer_path
+			t.string		:referrer_url
+			t.string		:referrer_host
+			t.string		:referrer_path
 
-			t.string		:landing_page_url
-			t.string		:landing_page_host
-			t.string		:landing_page_path
+			t.string		:lander_url
+			t.string		:lander_host
+			t.string		:lander_path
 
 			t.string		:campaign_source
 			t.string		:campaign_medium
@@ -27,18 +27,16 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:campaign_name
 			t.integer		:campaign_cost
 
-			t.string		:browser_family
-			t.string		:browser_version
-			t.string		:browser_major_version
-			t.string		:browser_minor_version
-			t.string		:operating_system_name
-			t.string		:operating_system_version
-			t.string		:operating_system_major_version
-			t.string		:operating_system_minor_version
 			t.string		:device_type
 			t.string		:device_family
 			t.string		:device_brand
 			t.string		:device_model
+
+			t.string		:os_name
+			t.string		:os_version
+
+			t.string		:browser_family
+			t.string		:browser_version
 
 			t.hstore 		:properties
 

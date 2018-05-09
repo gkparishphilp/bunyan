@@ -18,9 +18,6 @@ module Bunyan
 
 			client.user = options[:user]
 
-			client.landing_page_referrer_url	= options[:referrer_url]
-			client.landing_page_url 			= options[:page_url]
-
 			client.properties 	= options[:properties]
 
 			client.campaign_source = options[:campaign_source]
@@ -30,13 +27,29 @@ module Bunyan
 			client.campaign_content = options[:campaign_content]
 			client.campaign_cost = options[:campaign_cost]
 
-			client.landing_page_referrer_url = options[:referrer_url]
-			client.landing_page_referrer_host = options[:referrer_host]
-			client.landing_page_referrer_path = options[:referrer_path]
+			client.referrer_url = options[:referrer_url]
+			client.referrer_host = options[:referrer_host]
+			client.referrer_path = options[:referrer_path]
+			if options[:lreferrer_url].present?
+				begin
+					uri = URI( options[:referrer_url] )
+					client.referrer_host ||= uri.host
+					client.referrer_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
+				rescue URI::InvalidURIError => e
+				end
+			end
 
-			client.landing_page_url = options[:page_url]
-			client.landing_page_host = options[:page_host]
-			client.landing_page_path = options[:page_path]
+			client.lander_url = options[:page_url]
+			client.lander_host = options[:page_host]
+			client.lander_path = options[:page_path]
+			if options[:page_url].present?
+				begin
+					uri = URI( options[:page_url] )
+					client.lander_host ||= uri.host
+					client.lander_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
+				rescue URI::InvalidURIError => e
+				end
+			end
 
 			if options[:user_agent].present?
 				user_agent = UserAgentParser.parse options[:user_agent]
@@ -48,12 +61,8 @@ module Bunyan
 
 				client.browser_family					= user_agent.family
 				client.browser_version					= user_agent.version.to_s
-				client.browser_major_version			= user_agent.version.try(:major)
-				client.browser_minor_version			= user_agent.version.try(:minor)
-				client.operating_system_name			= user_agent.os.try(:name)
-				client.operating_system_version			= user_agent.os.version
-				client.operating_system_major_version 	= user_agent.os.version.try(:major)
-				client.operating_system_minor_version 	= user_agent.os.version.try(:minor)
+				client.os_name							= user_agent.os.try(:name)
+				client.os_version						= user_agent.os.version
 				client.device_type						= 'tablet' if browser.device.try(:tablet?)
 				client.device_type						= 'mobile' if browser.device.try(:mobile?)
 				client.device_type						= 'tv' if browser.device.try(:tv?)
@@ -63,23 +72,6 @@ module Bunyan
 				client.device_model						= user_agent.device.try(:model)
 			end
 
-			if options[:landing_page_referrer_url].present?
-				begin
-					uri = URI( options[:landing_page_referrer_url] )
-					client.landing_page_referrer_host ||= uri.host
-					client.landing_page_referrer_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
-				rescue URI::InvalidURIError => e
-				end
-			end
-
-			if options[:landing_page_url].present?
-				begin
-					uri = URI( options[:landing_page_url] )
-					client.landing_page_host ||= uri.host
-					client.landing_page_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
-				rescue URI::InvalidURIError => e
-				end
-			end
 
 			client.save 
 
@@ -90,7 +82,7 @@ module Bunyan
 
 		def to_s
 			user = self.user || 'Anonymous'
-			"#{self.id} #{user}'s #{self.device_type} #{self.device_family} #{device_brand} #{device_model}"
+			"#{self.id} #{user}'s #{self.device_type} #{self.device_type} #{os_name} #{os_version} #{browser_family} #{browser_version}"
 		end
 	end
 end

@@ -23,14 +23,14 @@ module Bunyan
 			event.campaign_content = options[:campaign_content] || options[:client].campaign_content
 			event.campaign_cost = options[:campaign_cost] || options[:client].campaign_cost
 
-			event.referrer_url = options[:referrer_url] || options[:client].landing_page_referrer_url
-			event.referrer_host = options[:referrer_host] || options[:client].landing_page_referrer_host
-			event.referrer_path = options[:referrer_path] || options[:client].landing_page_referrer_path
+			event.referrer_url = options[:referrer_url]
+			event.referrer_host = options[:referrer_host]
+			event.referrer_path = options[:referrer_path]
 
-			event.page_url = options[:page_url] || options[:client].landing_page_url
-			event.page_host = options[:page_host] || options[:client].landing_page_host
-			event.page_path = options[:page_path] || options[:client].landing_page_path
-			event.page_name = options[:page_name] || options[:client].landing_page_name
+			event.page_url = options[:page_url]
+			event.page_host = options[:page_host]
+			event.page_path = options[:page_path]
+			event.page_name = options[:page_name]
 
 
 			event.save
