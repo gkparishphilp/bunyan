@@ -1,0 +1,57 @@
+
+.container-fluid
+	.row
+		.col-xs-10
+			%ul.breadcrumb
+				%li
+					%a{ href: '/admin' }
+						Admin
+				%li
+					Events
+		.col-xs-2
+			
+	.row{ style: 'margin-top: 0' }
+		.col-xs-6
+			= raw paginate @events
+		.col-xs-6
+		
+
+	.row
+		.col-xs-12
+			- if @events.blank?
+				.well
+					%h3
+						No Events Found
+			- else
+
+				%table.table.table-light.table-bordered
+					%thead
+						%th
+							What
+						%th
+
+						%th
+							When
+						%th
+							Cat
+						%th
+							Client
+
+					%tbody
+						- @events.each do |event|
+							%tr
+								%td
+									= event.name
+								%td
+									= event.to_s
+								%td
+									= time_ago_in_words event.created_at
+									ago
+								%td
+									= event.category
+								%td
+									= link_to event.client, edit_client_admin_path( event.client_id )
+								
+								
+								
+		

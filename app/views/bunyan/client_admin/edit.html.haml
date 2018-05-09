@@ -1,0 +1,53 @@
+
+
+.container-fluid
+	.row
+		.col-xs-10
+			%ul.breadcrumb
+				%li
+					%a{ href: '/admin' }
+						Admin
+				%li
+					%a{ href: client_admin_index_path }
+						Clients
+				%li
+					= @client.to_s
+		.col-xs-2
+
+
+	.row
+		.col-xs-8
+			%h2
+				Events
+			%table.table
+				%thead
+					%th
+					%th
+					%th
+				%tbody
+					- @client.events.each do |event|
+						%tr
+							%td
+								= event.name
+							%td
+								= event.created_at
+							%td
+								= event.referrer_url
+
+
+
+		.col-xs-4
+			.well
+				%h3
+					Client Details
+				Device: 
+				= @client.to_s
+
+				%br
+				
+				Created: 
+				= @client.created_at
+
+				%br
+
+

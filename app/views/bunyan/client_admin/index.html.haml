@@ -1,0 +1,49 @@
+
+.container-fluid
+	.row
+		.col-xs-10
+			%ul.breadcrumb
+				%li
+					%a{ href: '/admin' }
+						Admin
+				%li
+					Clients
+		.col-xs-2
+			
+	.row{ style: 'margin-top: 0' }
+		.col-xs-6
+			= raw paginate @clients
+		.col-xs-6
+		
+
+	.row
+		.col-xs-12
+			- if @clients.blank?
+				.well
+					%h3
+						No Client Sessions Found
+			- else
+
+				%table.table.table-light.table-bordered
+					%thead
+						%th
+							
+						%th
+							
+						%th
+							
+
+					%tbody
+						- @clients.each do |client|
+							%tr
+								%td
+									= link_to client.uuid, edit_client_admin_path( client.id )
+								%td
+									= client.created_at
+								
+								%td
+									= client.device_type
+									= client.device_brand
+									= client.device_model
+									= client.device_family
+		
