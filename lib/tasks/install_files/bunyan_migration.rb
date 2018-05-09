@@ -1,7 +1,7 @@
 class BunyanMigration < ActiveRecord::Migration[5.1]
 	def change
 
-		create_table :bunyan_clients do |t| # cache this model's attributes, and have it expire after session is dead for X minutes (TTL)
+		create_table :bunyan_clients, force: true do |t| # cache this model's attributes, and have it expire after session is dead for X minutes (TTL)
 			t.references	:user
 			t.string		:uuid
 
@@ -47,7 +47,7 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 		add_index :bunyan_clients, :uuid, unique: true
 
 		
-		create_table :bunyan_events do |t|
+		create_table :bunyan_events, force: true do |t|
 			t.references	:user
 			t.references 	:client
 			t.references 	:target_obj, polymorphic: true

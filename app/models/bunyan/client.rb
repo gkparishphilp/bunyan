@@ -30,21 +30,20 @@ module Bunyan
 			client.campaign_content = options[:campaign_content]
 			client.campaign_cost = options[:campaign_cost]
 
-			client.referrer_url = options[:referrer_url]
-			client.referrer_host = options[:referrer_host]
-			client.referrer_path = options[:referrer_path]
+			client.landing_page_referrer_url = options[:referrer_url]
+			client.landing_page_referrer_host = options[:referrer_host]
+			client.landing_page_referrer_path = options[:referrer_path]
 
-			client.page_url = options[:page_url]
-			client.page_host = options[:page_host]
-			client.page_path = options[:page_path]
-			client.page_name = options[:page_name]
+			client.landing_page_url = options[:page_url]
+			client.landing_page_host = options[:page_host]
+			client.landing_page_path = options[:page_path]
 
 			if options[:user_agent].present?
 				user_agent = UserAgentParser.parse options[:user_agent]
 				browser = Browser.new options[:user_agent]
 
-				# don't record anything for bots
-				raise "Got a Bot: #{browser.bot.name}" unless browser.bot.name.blank?
+				# # don't record anything for bots
+				# raise "Got a Bot: #{browser.bot.name}" unless browser.bot.name.blank?
 				return false unless browser.bot.name.blank?
 
 				client.browser_family					= user_agent.family
@@ -91,7 +90,7 @@ module Bunyan
 
 		def to_s
 			user = self.user || 'Anonymous'
-			"#{self.id} #{user} #{self.device_type} #{self.device_family} #{device_brand} #{device_model}"
+			"#{self.id} #{user}'s #{self.device_type} #{self.device_family} #{device_brand} #{device_model}"
 		end
 	end
 end

@@ -19,12 +19,15 @@ module Bunyan
 				client = Client.find_by( uuid: client_uuid )
 				client ||= Client.create_from_options( options.merge( uuid: client_uuid ) )
 
+				client.update( user: options[:user] ) if client.user != options[:user]
+
 				# can't log without a valid cookied device
-				raise "Got No Device!!!" unless client.present?
+				# raise "Got No Device!!!" unless client.present?
 				return false unless client.present?
 
-				options.merge!( client: client )
-				options.merge!( name: name )
+				options[:client] = client
+				options[:name] = name 
+				options[:target_obj] ||= options[:on] 
 
 				event = Event.create_from_options( options )
 
