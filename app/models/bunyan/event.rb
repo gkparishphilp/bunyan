@@ -9,7 +9,7 @@ module Bunyan
 		def self.create_from_options( options )
 			
 			# TODO check for and reject duplicate events
-			if dup_event = Event.where( client: options[:client], name: options[:name] ).where( 'updated_at > :t', t: 10.seconds.ago ).first
+			if dup_event = Event.where( client: options[:client], name: options[:name], page_url: options[:page_url] ).where( 'updated_at > :t', t: 10.seconds.ago ).first
 				dup_event.touch( :updated_at )
 				return false 
 			end

@@ -1,12 +1,17 @@
 module Bunyan
 	module ApplicationHelper
 
-		def log_event( name, options: {} )
+		def bunyan_log( opts={} )
 			@event_service ||= Bunyan::EventService.new
 
 			client_uuid = cookies[:clientuuid] || SecureRandom.uuid
 
-			options.merge!( {
+			opts[:name] ||= opts[:event] || opts[:event_name]
+			opts[:target_obj] ||= opts[:on] 
+
+			raise "trying to log event without name" if opts[:name].blank?
+
+			opts.merge!( {
 				client_uuid: 				client_uuid,
 				user: 						current_user,
 				user_agent: 				request.user_agent,
@@ -22,8 +27,7 @@ module Bunyan
 				page_url: 					request.original_url,
 			} )
 
-
-			@event_service.log_event( name, options )
+			@event_service.log_event( opts )
 
 			cookies[:clientuuid] = {
 				:value => client_uuid,
