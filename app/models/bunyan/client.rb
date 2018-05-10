@@ -27,6 +27,9 @@ module Bunyan
 			client.campaign_content = options[:campaign_content]
 			client.campaign_cost = options[:campaign_cost]
 
+			client.partner_source = options[:partner_source]
+			client.partner_id = options[:partner_id]
+
 			client.referrer_url = options[:referrer_url]
 			client.referrer_host = options[:referrer_host]
 			client.referrer_path = options[:referrer_path]

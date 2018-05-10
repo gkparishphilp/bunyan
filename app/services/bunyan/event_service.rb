@@ -11,6 +11,7 @@ module Bunyan
 			end
 		end
 
+
 		protected
 
 			def log!( opts )

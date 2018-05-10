@@ -35,5 +35,23 @@ module Bunyan
 			}
 			
 		end
+
+
+		def bunyan_log_pageview( opts={} )
+
+			opts[:name] ||= 'pageview'
+
+			obj = opts[:on] || opts[:target_obj]
+			if obj.present?
+				opts[:content] ||= "viewed #{obj.to_s}"
+			else
+				opts[:content] ||= "viewed #{request.path}."
+			end
+
+
+			bunyan_log( opts )
+		end
+
+
 	end
 end

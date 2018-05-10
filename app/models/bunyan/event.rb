@@ -16,12 +16,15 @@ module Bunyan
 
 			event = self.new( name: options[:name], client: options[:client], user: options[:user], target_obj: options[:target_obj], category: options[:category], content: options[:content], value: options[:value] )
 
-			event.campaign_source = options[:campaign_source] || options[:client].campaign_source
-			event.campaign_medium = options[:campaign_medium] || options[:client].campaign_medium
-			event.campaign_name = options[:campaign_name] || options[:client].campaign_name
-			event.campaign_term = options[:campaign_term] || options[:client].campaign_term
-			event.campaign_content = options[:campaign_content] || options[:client].campaign_content
-			event.campaign_cost = options[:campaign_cost] || options[:client].campaign_cost
+			event.campaign_source = options[:campaign_source]
+			event.campaign_medium = options[:campaign_medium]
+			event.campaign_name = options[:campaign_name]
+			event.campaign_term = options[:campaign_term]
+			event.campaign_content = options[:campaign_content]
+			event.campaign_cost = options[:campaign_cost]
+
+			event.partner_source = options[:partner_source]
+			event.partner_id = options[:partner_id]
 
 			event.referrer_url = options[:referrer_url]
 			event.referrer_host = options[:referrer_host]

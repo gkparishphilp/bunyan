@@ -27,6 +27,9 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:campaign_name
 			t.integer		:campaign_cost
 
+			t.string		:partner_source
+			t.string		:partner_id
+
 			t.string		:device_type
 			t.string		:device_family
 			t.string		:device_brand
@@ -67,6 +70,9 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:campaign_content
 			t.integer		:campaign_cost
 
+			t.string		:partner_source
+			t.string		:partner_id
+
 			t.string		:referrer_url
 			t.string		:referrer_host
 			t.string		:referrer_path
@@ -80,7 +86,7 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 
 			t.timestamps
 		end
-		add_index :bunyan_events, [:name, :created_at]
+		add_index :bunyan_events, [:name, :created_at, :page_url]
 
 	end
 end
