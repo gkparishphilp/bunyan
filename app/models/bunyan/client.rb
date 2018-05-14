@@ -60,7 +60,14 @@ module Bunyan
 
 				# # don't record anything for bots
 				# raise "Got a Bot: #{browser.bot.name}" unless browser.bot.name.blank?
-				return false unless browser.bot.name.blank?
+				
+				# TODO - change to whitelist of NON-loggable bots
+				# e.g.:
+				if Bunyan.log_bots
+					return false if browser.bot.name =~ Bunyan.bot_blacklist
+				end
+				
+				client.is_bot = browser.bot.name.present?
 
 				client.browser_family					= user_agent.family
 				client.browser_version					= user_agent.version.to_s

@@ -8,9 +8,62 @@ module Bunyan
 
 	class << self
 		##### config vars
-		#mattr_accessor :something
+		mattr_accessor 	:bot_blacklist
+		mattr_accessor 	:event_categories
+		mattr_accessor 	:log_bots
+		mattr_accessor 	:duplication_interval
+		
 
-		#self.something = 'default'
+
+		self.bot_blacklist = /google|yahoo|bing|yandex/i
+
+		self.event_categories = { 
+			'pageview'			=> 'browse',
+			'click' 			=> 'browse',
+
+			'optin'				=> 'account',
+			'login'				=> 'account',
+			'logout'			=> 'account',
+			'register' 			=> 'account',
+			'forgot_pw'			=> 'account',
+			'reset_pw' 			=> 'account',
+			'update_profile'	=> 'account',
+
+			'add_cart' 			=> 'ecom',
+			'remove_cart' 		=> 'ecom',
+			'update_cart' 		=> 'ecom', # quantity
+			'apply_discount' 	=> 'ecom',
+			'init_checkout' 	=> 'ecom',
+			'purchase'			=> 'ecom',
+			'renewal'			=> 'ecom',
+			'parcel_shipped' 	=> 'ecom',
+			'parcel_recieved' 	=> 'ecom',
+			'parcel_failed' 	=> 'ecom',
+			'refund' 			=> 'ecom',
+
+			'transaction_sxs'		=> 'ecom',
+			'transaction_failed'	=> 'ecom',
+			
+			'update_bill_addr' 	=> 'ecom',
+			'update_ship_addr' 	=> 'ecom',
+			'update_payment' 	=> 'ecom',
+
+			'cancel_sub' 			=> 'ecom',
+			'update_sub_interval' 	=> 'ecom',
+			'update_sub_next_date' 	=> 'ecom',
+
+			'comment' 			=> 'social',
+			'review' 			=> 'social',
+			'add_topic' 		=> 'social',
+			'add_post' 			=> 'social',
+			'vote' 				=> 'social',
+			'follow' 			=> 'social',
+		}
+
+		self.log_bots = false
+		self.duplication_interval = 10.seconds
+
+
 	end
 
 	# this function maps the vars from your app into your engine

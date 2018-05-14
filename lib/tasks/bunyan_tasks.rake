@@ -14,7 +14,7 @@ namespace :bunyan do
 		files.each do |filename, path|
 			puts "installing: #{path}/#{filename}"
 
-			source = File.join( Gem.loaded_specs["swell_media"].full_gem_path, "lib/tasks/install_files", filename )
+			source = File.join( Gem.loaded_specs["bunyan"].full_gem_path, "lib/tasks/install_files", filename )
     		if path == :root
     			target = File.join( Rails.root, filename )
     		else

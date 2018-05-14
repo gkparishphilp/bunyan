@@ -30,6 +30,8 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:partner_source
 			t.string		:partner_id
 
+			t.boolean 		:is_bot
+
 			t.string		:device_type
 			t.string		:device_family
 			t.string		:device_brand

@@ -6,10 +6,17 @@ module Bunyan
 
 			client_uuid = cookies[:clientuuid] || SecureRandom.uuid
 
-			opts[:name] ||= opts[:event] || opts[:event_name]
-			opts[:target_obj] ||= opts[:on] 
+			opts[:name] ||= opts[:event] || opts[:event_name] || 'pageview' # default to pageview if no other event name specified
+			opts[:target_obj] ||= opts[:on] || opts[:target]
 
-			raise "trying to log event without name" if opts[:name].blank?
+			if opts[:name] == 'pageview'
+				if opts[:target_obj].present?
+					opts[:content] ||= "viewed #{request.method} #{request.path} for #{opts[:target_obj].to_s}"
+				else
+					opts[:content] ||= "viewed #{request.method} #{request.path}."
+				end
+			end
+
 
 			opts.merge!( {
 				client_uuid: 				client_uuid,
@@ -36,21 +43,6 @@ module Bunyan
 			
 		end
 
-
-		def bunyan_log_pageview( opts={} )
-
-			opts[:name] ||= 'pageview'
-
-			obj = opts[:on] || opts[:target_obj]
-			if obj.present?
-				opts[:content] ||= "viewed #{obj.to_s}"
-			else
-				opts[:content] ||= "viewed #{request.path}."
-			end
-
-
-			bunyan_log( opts )
-		end
 
 
 	end
