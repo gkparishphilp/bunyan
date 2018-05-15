@@ -17,10 +17,12 @@ module Bunyan
 				end
 			end
 
+			opts[:user] ||= current_user
+
 
 			opts.merge!( {
 				client_uuid: 				client_uuid,
-				user: 						current_user,
+				user: 						opts[:user],
 				user_agent: 				request.user_agent,
 				page_name: 					@page_meta[:title],
 				country: 					request.headers['CF-IPCountry'],
@@ -40,7 +42,7 @@ module Bunyan
 				:value => client_uuid,
 				:expires => 1.year.from_now
 			}
-			
+
 		end
 
 
