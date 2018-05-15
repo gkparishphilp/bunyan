@@ -49,8 +49,9 @@ module Bunyan
 			'update_payment' 	=> 'ecom',
 
 			'cancel_sub' 			=> 'ecom',
-			'update_sub_interval' 	=> 'ecom',
-			'update_sub_next_date' 	=> 'ecom',
+			'reactivate_sub' 		=> 'ecom',
+			'update_sub' 			=> 'ecom', # interval, quantity, next_date
+
 
 			'comment' 			=> 'social',
 			'review' 			=> 'social',
