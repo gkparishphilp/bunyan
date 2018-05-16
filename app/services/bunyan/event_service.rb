@@ -15,6 +15,12 @@ module Bunyan
 		protected
 
 			def log!( opts )
+
+				# Aliases
+				opts[:name] ||= opts[:event] || opts[:event_name]
+				opts[:target_obj] ||= opts[:on] || opts[:target]
+
+
 				client_uuid = opts.delete( :client_uuid )
 
 				if client_uuid.present?
@@ -25,7 +31,7 @@ module Bunyan
 					client.update( user: opts[:user] ) if opts[:user].present? && client.user != opts[:user]
 
 					opts[:client] = client
-					
+
 				end
 
 
