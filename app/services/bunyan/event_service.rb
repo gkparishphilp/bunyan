@@ -17,16 +17,17 @@ module Bunyan
 			def log!( opts )
 				client_uuid = opts.delete( :client_uuid )
 
-				client = Client.find_by( uuid: client_uuid )
-				client ||= Client.create_from_options( opts.merge!( uuid: client_uuid ) )
+				if client_uuid.present?
 
-				client.update( user: opts[:user] ) if opts[:user].present? && client.user != opts[:user]
+					client = Client.find_by( uuid: client_uuid )
+					client ||= Client.create_from_options( opts.merge!( uuid: client_uuid ) )
 
-				# can't log without a valid cookied device
-				# raise "Got No Device!!!" unless client.present?
-				return false unless client.present?
+					client.update( user: opts[:user] ) if opts[:user].present? && client.user != opts[:user]
 
-				opts[:client] = client
+					opts[:client] = client
+					
+				end
+
 
 				event = Event.create_from_options( opts )
 
