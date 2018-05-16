@@ -51,7 +51,10 @@
 								%td
 									= event.category
 								%td
-									= link_to event.client, edit_client_admin_path( event.client_id )
+									- if event.client.present?
+										= link_to event.client, edit_client_admin_path( event.client_id )
+									- else
+										System
 								
 								
 								
