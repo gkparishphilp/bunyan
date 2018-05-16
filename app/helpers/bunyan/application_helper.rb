@@ -4,7 +4,8 @@ module Bunyan
 		def bunyan_log( opts={} )
 			@event_service ||= Bunyan::EventService.new
 
-			client_uuid = cookies[:clientuuid] || SecureRandom.uuid
+			client_uuid = opts[:client_uuid]
+			client_uuid ||= cookies[:clientuuid] || SecureRandom.uuid unless opts.has_key?(:client_uuid)
 
 			opts[:name] ||= opts[:event] || opts[:event_name] || 'pageview' # default to pageview if no other event name specified
 			opts[:target_obj] ||= opts[:on] || opts[:target]
