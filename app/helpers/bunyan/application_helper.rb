@@ -1,6 +1,15 @@
 module Bunyan
 	module ApplicationHelper
 
+		def bunyan_system_log( opts={} )
+			@event_service ||= Bunyan::EventService.new
+
+			opts[:name] ||= opts[:event] || opts[:event_name]
+			opts[:target_obj] ||= opts[:on] || opts[:target]
+
+			@event_service.log_event( opts )
+		end
+
 		def bunyan_log( opts={} )
 			@event_service ||= Bunyan::EventService.new
 
