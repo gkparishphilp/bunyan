@@ -7,14 +7,24 @@ module Bunyan
 
 
 		def self.create_from_options( options )
-			
+
 			# TODO check for and reject duplicate events
 			if options[:client] && Event.where( client: options[:client], name: options[:name], page_url: options[:page_url] ).where( 'updated_at > :t', t: Bunyan.duplication_interval.ago ).present?
 				#dup_event.touch( :updated_at )
-				return false 
+				return false
 			end
 
-			event = self.new( name: options[:name], client: options[:client], user: options[:user], target_obj: options[:target_obj], category: options[:category], content: options[:content], value: options[:value] )
+			event = self.new(
+				name: options[:name],
+				client: options[:client],
+				user: options[:user],
+				target_obj: options[:target_obj],
+				category: options[:category],
+				content: options[:content],
+				value: options[:value]
+			)
+
+			event.created_at = options[:created_at] if options[:created_at].present?
 
 			event.campaign_source = options[:campaign_source]
 			event.campaign_medium = options[:campaign_medium]
