@@ -52,8 +52,11 @@
 						%td
 							Client: 
 						%td
-							%a{ href: edit_client_admin_path( @event.client ) }
-								= @event.client.to_s
+							- if @event.client.present?
+								%a{ href: edit_client_admin_path( @event.client ) }
+									= @event.client.to_s
+							- else
+								System
 
 					%tr
 						%td
