@@ -11,9 +11,8 @@ module Bunyan
 		mattr_accessor 	:bot_blacklist
 		mattr_accessor 	:event_categories
 		mattr_accessor 	:log_bots
-		mattr_accessor 	:duplication_interval
+		mattr_accessor 	:default_ttl
 		
-
 
 		self.bot_blacklist = /google|yahoo|bing|yandex/i
 
@@ -62,7 +61,7 @@ module Bunyan
 		}
 
 		self.log_bots = false
-		self.duplication_interval = 10.seconds
+		self.default_ttl = 10.seconds
 
 
 	end

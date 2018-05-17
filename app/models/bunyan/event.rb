@@ -9,7 +9,7 @@ module Bunyan
 		def self.create_from_options( options )
 
 			# TODO check for and reject duplicate events
-			ttl = options[:ttl] || Bunyan.duplication_interval
+			ttl = options[:ttl] || Bunyan.default_ttl
 			if options[:client] && Event.where( client: options[:client], name: options[:name], page_url: options[:page_url] ).where( 'updated_at > :t', t: ttl.ago ).present?
 				#dup_event.touch( :updated_at )
 				return false
@@ -19,7 +19,8 @@ module Bunyan
 				name: options[:name],
 				client: options[:client],
 				user: options[:user],
-				target_obj: options[:target_obj],
+				target_obj_type: options[:target_obj].try( :class ).try( :base_class ).try( :name ),
+				target_obj_id: options[:target_obj].try( :id ),
 				category: options[:category],
 				content: options[:content],
 				value: options[:value]
