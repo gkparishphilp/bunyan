@@ -1,11 +1,19 @@
 module Bunyan
 	module ApplicationHelper
 
+		def bunyan_system_log( opts={} )
+			@event_service ||= Bunyan::EventService.new
+
+			opts[:name] ||= opts[:event] || opts[:event_name]
+			opts[:target_obj] ||= opts[:on] || opts[:target]
+
+			@event_service.log_event( opts )
+		end
+
 		def bunyan_log( opts={} )
 			@event_service ||= Bunyan::EventService.new
 
-			client_uuid = opts[:client_uuid]
-			client_uuid ||= cookies[:clientuuid] || SecureRandom.uuid unless opts.has_key?(:client_uuid)
+			client_uuid ||= cookies[:clientuuid] || SecureRandom.uuid
 
 			opts[:name] ||= opts[:event] || opts[:event_name] || 'pageview' # default to pageview if no other event name specified
 			opts[:target_obj] ||= opts[:on] || opts[:target]
