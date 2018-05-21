@@ -41,14 +41,34 @@ module Bunyan
 			event.referrer_url = options[:referrer_url]
 			event.referrer_host = options[:referrer_host]
 			event.referrer_path = options[:referrer_path]
+			event.referrer_params = options[:referrer_params]
+			if options[:referrer_url].present?
+				begin
+					uri = URI( options[:referrer_url] )
+					event.referrer_host ||= uri.host
+					event.referrer_path ||= uri.path
+					event.referrer_params ||= uri.query
+				rescue URI::InvalidURIError => e
+				end
+			end
 
 			event.page_url = options[:page_url]
 			event.page_host = options[:page_host]
 			event.page_path = options[:page_path]
+			event.page_params = options[:page_params]
 			event.page_name = options[:page_name]
 
-			event.category = options[:category] || Bunyan.event_categories[options[:name] ]
+			if options[:page_url].present?
+				begin
+					uri = URI( options[:page_url] )
+					event.page_host ||= uri.host
+					event.page_path ||= uri.path 
+					event.page_params ||= uri.query
+				rescue URI::InvalidURIError => e
+				end
+			end
 
+			event.category = options[:category] || Bunyan.event_categories[options[:name] ]
 
 			event.save
 

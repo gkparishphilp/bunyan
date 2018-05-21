@@ -33,11 +33,13 @@ module Bunyan
 			client.referrer_url = options[:referrer_url]
 			client.referrer_host = options[:referrer_host]
 			client.referrer_path = options[:referrer_path]
-			if options[:lreferrer_url].present?
+			client.referrer_params = options[:referrer_params]
+			if options[:referrer_url].present?
 				begin
 					uri = URI( options[:referrer_url] )
 					client.referrer_host ||= uri.host
-					client.referrer_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
+					client.referrer_path ||= uri.path
+					client.referrer_params ||= uri.query
 				rescue URI::InvalidURIError => e
 				end
 			end
@@ -45,11 +47,13 @@ module Bunyan
 			client.lander_url = options[:page_url]
 			client.lander_host = options[:page_host]
 			client.lander_path = options[:page_path]
+			client.lander_params = options[:page_params]
 			if options[:page_url].present?
 				begin
 					uri = URI( options[:page_url] )
 					client.lander_host ||= uri.host
-					client.lander_path ||= ( uri.query.present? ? "#{uri.path}?#{uri.query}" : uri.path )
+					client.lander_path ||= uri.path
+					client.lander_params ||= uri.query
 				rescue URI::InvalidURIError => e
 				end
 			end

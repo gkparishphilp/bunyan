@@ -15,10 +15,12 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:referrer_url
 			t.string		:referrer_host
 			t.string		:referrer_path
+			t.string		:referrer_params
 
 			t.string		:lander_url
 			t.string		:lander_host
 			t.string		:lander_path
+			t.string		:lander_params
 
 			t.string		:campaign_source
 			t.string		:campaign_medium
@@ -78,10 +80,12 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.string		:referrer_url
 			t.string		:referrer_host
 			t.string		:referrer_path
+			t.string		:referrer_params
 
 			t.string		:page_url
 			t.string		:page_host
 			t.string		:page_path
+			t.string 		:page_params
 			t.string		:page_name
 
 			t.hstore		:properties
