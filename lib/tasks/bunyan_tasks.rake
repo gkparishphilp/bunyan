@@ -8,7 +8,7 @@ namespace :bunyan do
 		puts "Installing Bunyan. Chop Chop"
 
 		files = {
-
+			'bunyan.rb' => 'config/initializers'
 		}
 
 		files.each do |filename, path|
