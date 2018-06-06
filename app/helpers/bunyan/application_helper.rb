@@ -2,7 +2,7 @@ module Bunyan
 	module ApplicationHelper
 
 		def bunyan_system_log( opts={} )
-			@event_service ||= Bunyan::EventService.new
+			@event_service ||= Bunyan.event_service_class_name.constantize.new
 
 			opts[:name] ||= opts[:event] || opts[:event_name]
 			opts[:target_obj] ||= opts[:on] || opts[:target]
@@ -11,7 +11,7 @@ module Bunyan
 		end
 
 		def bunyan_log( opts={} )
-			@event_service ||= Bunyan::EventService.new
+			@event_service ||= Bunyan.event_service_class_name.constantize.new
 
 			client_uuid ||= cookies[:clientuuid] || SecureRandom.uuid
 

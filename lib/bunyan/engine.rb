@@ -10,13 +10,14 @@ module Bunyan
 		##### config vars
 		mattr_accessor 	:bot_blacklist
 		mattr_accessor 	:event_categories
+		mattr_accessor 	:event_service_class_name
 		mattr_accessor 	:log_bots
 		mattr_accessor 	:default_ttl
-		
+
 
 		self.bot_blacklist = /google|yahoo|bing|yandex/i
 
-		self.event_categories = { 
+		self.event_categories = {
 			'pageview'			=> 'browse',
 			'click' 			=> 'browse',
 
@@ -42,7 +43,7 @@ module Bunyan
 
 			'transaction_sxs'		=> 'ecom',
 			'transaction_failed'	=> 'ecom',
-			
+
 			'update_bill_addr' 	=> 'ecom',
 			'update_ship_addr' 	=> 'ecom',
 			'update_payment' 	=> 'ecom',
@@ -59,6 +60,8 @@ module Bunyan
 			'vote' 				=> 'social',
 			'follow' 			=> 'social',
 		}
+
+		self.event_service_class_name = "Bunyan::EventService"
 
 		self.log_bots = false
 		self.default_ttl = 10.seconds
