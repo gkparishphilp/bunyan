@@ -1,5 +1,5 @@
 # Bunyan
-Short description and motivation.
+Simple activity logger. Use it to validate simple metrics, generate activity streams, and/or in combination with Edison for A/B testing.
 
 ## Usage
 How to use my plugin.

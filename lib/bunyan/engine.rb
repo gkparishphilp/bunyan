@@ -22,6 +22,7 @@ module Bunyan
 
 			'optin'				=> 'account',
 			'login'				=> 'account',
+			'login_fail'		=> 'account',
 			'logout'			=> 'account',
 			'register' 			=> 'account',
 			'forgot_pw'			=> 'account',
