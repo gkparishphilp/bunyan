@@ -41,6 +41,7 @@ module Bunyan
 			'parcel_recieved' 	=> 'ecom',
 			'parcel_failed' 	=> 'ecom',
 			'refund' 			=> 'ecom',
+			'fraud_warning'		=> 'ecom',
 
 			'transaction_sxs'		=> 'ecom',
 			'transaction_failed'	=> 'ecom',
