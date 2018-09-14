@@ -1,5 +1,5 @@
 module Bunyan
-	class ClientAdminController < SwellMedia::AdminController 
+	class ClientAdminController < ApplicationAdminController
 
 
 		def edit

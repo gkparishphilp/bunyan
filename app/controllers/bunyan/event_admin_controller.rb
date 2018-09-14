@@ -1,5 +1,5 @@
 module Bunyan
-	class EventAdminController < SwellMedia::AdminController 
+	class EventAdminController < ApplicationAdminController 
 
 		def index
 			@events = Event.order( created_at: :desc ).page( params[:page] )
