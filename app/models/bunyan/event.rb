@@ -7,6 +7,7 @@ module Bunyan
 
 
 		def self.create_from_options( options )
+			event_attributes = options[:event_attributes] || {}
 
 			# TODO check for and reject duplicate events
 			ttl = options[:ttl] || Bunyan.default_ttl
@@ -15,7 +16,7 @@ module Bunyan
 				return false
 			end
 
-			event = self.new(
+			event_attributes.merge!(
 				name: options[:name],
 				client: options[:client],
 				user: options[:user],
@@ -25,6 +26,8 @@ module Bunyan
 				content: options[:content],
 				value: options[:value]
 			)
+
+			event = self.new(event_attributes)
 
 			event.created_at = options[:created_at] if options[:created_at].present?
 
@@ -62,7 +65,7 @@ module Bunyan
 				begin
 					uri = URI( options[:page_url] )
 					event.page_host ||= uri.host
-					event.page_path ||= uri.path 
+					event.page_path ||= uri.path
 					event.page_params ||= uri.query
 				rescue URI::InvalidURIError => e
 				end
