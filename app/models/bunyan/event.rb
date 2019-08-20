@@ -2,7 +2,8 @@ module Bunyan
 	class Event < ApplicationRecord
 
 		belongs_to 		:client, optional: true
-		belongs_to 		:target_obj, polymorphic: true, optional: true
+		belongs_to 		:parent_obj, polymorphic: true, optional: true
+		belongs_to 		:result_obj, polymorphic: true, optional: true
 		belongs_to 		:user, optional: true
 
 
@@ -20,8 +21,10 @@ module Bunyan
 				name: options[:name],
 				client: options[:client],
 				user: options[:user],
-				target_obj_type: options[:target_obj].try( :class ).try( :base_class ).try( :name ),
-				target_obj_id: options[:target_obj].try( :id ),
+				parent_obj_type: options[:parent_obj].try( :class ).try( :base_class ).try( :name ),
+				parent_obj_id: options[:parent_obj].try( :id ),
+				result_obj_type: options[:result_obj].try( :class ).try( :base_class ).try( :name ),
+				result_obj_id: options[:result_obj].try( :id ),
 				category: options[:category],
 				content: options[:content],
 				value: options[:value]

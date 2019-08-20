@@ -18,7 +18,8 @@ module Bunyan
 
 				# Aliases
 				opts[:name] ||= opts[:event] || opts[:event_name]
-				opts[:target_obj] ||= opts[:on] || opts[:target]
+				opts[:parent_obj] ||= opts[:on] || opts[:parent] || opts[:target]
+				opts[:result_obj] ||= opts[:result]
 
 
 				client_uuid = opts.delete( :client_uuid )

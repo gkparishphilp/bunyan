@@ -5,7 +5,8 @@ module Bunyan
 			@event_service ||= Bunyan.event_service_class_name.constantize.new
 
 			opts[:name] ||= opts[:event] || opts[:event_name]
-			opts[:target_obj] ||= opts[:on] || opts[:target]
+			opts[:parent_obj] ||= opts[:on] || opts[:target] || opts[:parent]
+			opts[:result_obj] ||= opts[:result]
 
 			@event_service.log_event( opts )
 		end
@@ -16,11 +17,12 @@ module Bunyan
 			client_uuid ||= cookies[:clientuuid] || SecureRandom.uuid
 
 			opts[:name] ||= opts[:event] || opts[:event_name] || 'pageview' # default to pageview if no other event name specified
-			opts[:target_obj] ||= opts[:on] || opts[:target]
+			opts[:parent_obj] ||= opts[:on] || opts[:target] || opts[:parent]
+			opts[:result_obj] ||= opts[:result]
 
 			if opts[:name] == 'pageview'
-				if opts[:target_obj].present?
-					opts[:content] ||= "viewed #{request.method} #{request.path} for #{opts[:target_obj].to_s}"
+				if opts[:parent_obj].present?
+					opts[:content] ||= "viewed #{request.method} #{request.path} for #{opts[:parent_obj].to_s}"
 				else
 					opts[:content] ||= "viewed #{request.method} #{request.path}."
 				end

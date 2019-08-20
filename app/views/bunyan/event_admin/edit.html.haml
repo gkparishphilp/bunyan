@@ -12,7 +12,7 @@
 				%li
 					= @event.to_s
 		.col-xs-2
-			
+
 
 	.row
 		.col-xs-12
@@ -23,34 +23,34 @@
 
 					%tr
 						%td
-							Name: 
+							Name:
 						%td
 							= @event.name
 					%tr
 						%td
-							Category: 
+							Category:
 						%td
 							= @event.category
 					%tr
 						%td
-							Content: 
+							Content:
 						%td
 							= @event.to_s
 					%tr
 						%td
-							Value: 
+							Value:
 						%td
 							= @event.value
 
 					%tr
 						%td
-							User: 
+							User:
 						%td
 							= @event.user
 
 					%tr
 						%td
-							Client: 
+							Client:
 						%td
 							- if @event.client.present?
 								%a{ href: edit_client_admin_path( @event.client ) }
@@ -60,99 +60,96 @@
 
 					%tr
 						%td
-							Target Obj: 
+							Parent Obj:
 						%td
-							= @event.target_obj.to_s
+							= @event.parent_obj.to_s
 
 					%tr
 						%td
-							Created: 
+							Result Obj:
+						%td
+							= @event.result_obj.to_s
+
+					%tr
+						%td
+							Created:
 						%td
 							= @event.created_at
 
 					%tr
 						%td
-							IP: 
+							IP:
 						%td
 							= @event.ip
 					%tr
 						%td
-							UserAgent: 
+							UserAgent:
 						%td
 							= @event.user_agent
-				
+
 					%tr
 						%td
-							Referrer URL: 
+							Referrer URL:
 						%td
 							= @event.referrer_url
 					%tr
 						%td
-							Referrer host: 
+							Referrer host:
 						%td
 							= @event.referrer_host
 					%tr
 						%td
-							Referrer Path: 
+							Referrer Path:
 						%td
 							= @event.referrer_path
 					%tr
 						%td
-							Page URL: 
+							Page URL:
 						%td
 							= @event.page_url
 					%tr
 						%td
-							Page host: 
+							Page host:
 						%td
 							= @event.page_host
 					%tr
 						%td
-							Page Path: 
+							Page Path:
 						%td
 							= @event.page_path
 					%tr
 						%td
-							Page Name: 
+							Page Name:
 						%td
 							= @event.page_name
 
 					%tr
 						%td
-							Campaign Source: 
+							Campaign Source:
 						%td
 							= @event.campaign_source
 					%tr
 						%td
-							Campaign Medium: 
+							Campaign Medium:
 						%td
 							= @event.campaign_medium
 					%tr
 						%td
-							Campaign Term: 
+							Campaign Term:
 						%td
 							= @event.campaign_term
 					%tr
 						%td
-							Campaign Content: 
+							Campaign Content:
 						%td
 							= @event.campaign_content
 					%tr
 						%td
-							Campaign Name: 
+							Campaign Name:
 						%td
 							= @event.campaign_name
 					%tr
 						%td
-							Campaign Cost: 
+							Campaign Cost:
 						%td
 							= @event.campaign_cost
-				
-
-
-
-
-			
-								
-								
-		

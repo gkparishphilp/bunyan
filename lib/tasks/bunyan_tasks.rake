@@ -26,6 +26,7 @@ namespace :bunyan do
 		# migrations
 		migrations = [
 			'bunyan_migration.rb',
+			'bunyan_event_updates_migration.rb',
 		]
 
 		prefix = Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
