@@ -1,4 +1,4 @@
-class BunyanEventMigration < ActiveRecord::Migration[5.1]
+class BunyanEventUpdatesMigration < ActiveRecord::Migration[5.1]
 	def change
 
 		rename_column :bunyan_events, :target_obj_type, :parent_obj_type
