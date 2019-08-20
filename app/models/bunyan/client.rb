@@ -3,7 +3,7 @@ require 'browser'
 
 module Bunyan
 	class Client < ApplicationRecord
-		
+
 		belongs_to 	:user, optional: true
 
 		has_many 	:events
@@ -15,6 +15,11 @@ module Bunyan
 			return false unless options[:uuid].present?
 
 			client = self.new( uuid: options[:uuid] )
+			client.ip = options[:ip]
+			client.user_agent = options[:user_agent]
+			client.country = options[:country]
+			client.state = options[:state]
+			client.city = options[:city]
 
 			client.user = options[:user]
 
@@ -64,13 +69,13 @@ module Bunyan
 
 				# # don't record anything for bots
 				# raise "Got a Bot: #{browser.bot.name}" unless browser.bot.name.blank?
-				
+
 				# TODO - change to whitelist of NON-loggable bots
 				# e.g.:
 				if Bunyan.log_bots
 					return false if browser.bot.name =~ Bunyan.bot_blacklist
 				end
-				
+
 				client.is_bot = browser.bot.name.present?
 
 				client.browser_family					= user_agent.family
@@ -87,7 +92,7 @@ module Bunyan
 			end
 
 
-			client.save 
+			client.save
 
 			return client
 
