@@ -20,6 +20,7 @@ module Bunyan
 		self.event_categories = {
 			'pageview'			=> 'browse',
 			'click' 			=> 'browse',
+			'visit'			=> 'browse',
 
 			'optin'				=> 'account',
 			'login'				=> 'account',

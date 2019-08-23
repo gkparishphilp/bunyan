@@ -12,7 +12,7 @@ module Bunyan
 		end
 
 		def is_visit?( event )
-			event.name == 'visit' && event.category == 'browse'
+			event && event.name == 'visit' && event.category == 'browse'
 		end
 
 		protected
@@ -60,6 +60,8 @@ module Bunyan
 					client.last_lander_params = event.page_params
 					client.save
 				end
+
+				event
 
 			end
 
