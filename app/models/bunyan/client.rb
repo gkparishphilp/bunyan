@@ -25,40 +25,41 @@ module Bunyan
 
 			client.properties 	= options[:properties]
 
-			client.campaign_source = options[:campaign_source]
-			client.campaign_medium = options[:campaign_medium]
-			client.campaign_name = options[:campaign_name]
-			client.campaign_term = options[:campaign_term]
-			client.campaign_content = options[:campaign_content]
-			client.campaign_cost = options[:campaign_cost]
+			client.first_campaign_source ||= options[:campaign_source]
+			client.first_campaign_medium ||= options[:campaign_medium]
+			client.first_campaign_name ||= options[:campaign_name]
+			client.first_campaign_term ||= options[:campaign_term]
+			client.first_campaign_content ||= options[:campaign_content]
+			client.first_campaign_cost ||= options[:campaign_cost]
 
-			client.partner_source = options[:partner_source]
-			client.partner_id = options[:partner_id]
+			client.first_partner_source ||= options[:partner_source]
+			client.first_partner_id ||= options[:partner_id]
 
-			client.referrer_url = options[:referrer_url]
-			client.referrer_host = options[:referrer_host]
-			client.referrer_path = options[:referrer_path]
-			client.referrer_params = options[:referrer_params]
+			client.first_referrer_url ||= options[:referrer_url]
+			client.first_referrer_host ||= options[:referrer_host]
+			client.first_referrer_path ||= options[:referrer_path]
+			client.first_referrer_params ||= options[:referrer_params]
+
 			if options[:referrer_url].present?
 				begin
 					uri = URI( options[:referrer_url] )
-					client.referrer_host ||= uri.host
-					client.referrer_path ||= uri.path
-					client.referrer_params ||= uri.query
+					client.first_referrer_host ||= uri.host
+					client.first_referrer_path ||= uri.path
+					client.first_referrer_params ||= uri.query
 				rescue URI::InvalidURIError => e
 				end
 			end
 
-			client.lander_url = options[:page_url]
-			client.lander_host = options[:page_host]
-			client.lander_path = options[:page_path]
-			client.lander_params = options[:page_params]
+			client.first_lander_url ||= options[:page_url]
+			client.first_lander_host ||= options[:page_host]
+			client.first_lander_path ||= options[:page_path]
+			client.first_lander_params ||= options[:page_params]
 			if options[:page_url].present?
 				begin
 					uri = URI( options[:page_url] )
-					client.lander_host ||= uri.host
-					client.lander_path ||= uri.path
-					client.lander_params ||= uri.query
+					client.first_lander_host ||= uri.host
+					client.first_lander_path ||= uri.path
+					client.first_lander_params ||= uri.query
 				rescue URI::InvalidURIError => e
 				end
 			end
