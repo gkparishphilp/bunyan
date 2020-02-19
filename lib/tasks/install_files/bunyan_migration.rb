@@ -56,6 +56,7 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.references	:user
 			t.references 	:client
 			t.references 	:target_obj, polymorphic: true
+			t.references 	:result_obj, polymorphic: true
 
 			# EVENT SCOPE
 			t.string		:name
@@ -93,6 +94,17 @@ class BunyanMigration < ActiveRecord::Migration[5.1]
 			t.timestamps
 		end
 		add_index :bunyan_events, [:name, :created_at, :page_url]
+
+		create_table :event_summaries do |t|
+			t.datetime 		:period_start
+			t.datetime 		:period_end
+			t.string 		:event_name
+			t.float 		:value
+			t.integer		:count
+
+			t.timestamps
+
+		end
 
 	end
 end
