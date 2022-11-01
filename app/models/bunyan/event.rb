@@ -38,6 +38,8 @@ module Bunyan
 			event.campaign_content = options[:campaign_content]
 			event.campaign_cost = options[:campaign_cost]
 
+			event.cart_id = options[:cart_id] if event.respond_to? :cart_id
+
 			event.partner_source = options[:partner_source]
 			event.partner_id = options[:partner_id]
 
