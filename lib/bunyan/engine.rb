@@ -6,7 +6,6 @@
 
 module Bunyan
 
-	class << self
 		##### config vars
 		mattr_accessor 	:bot_blacklist
 		mattr_accessor 	:event_categories
@@ -68,8 +67,6 @@ module Bunyan
 		self.log_bots = false
 		self.default_ttl = 10.seconds
 
-
-	end
 
 	# this function maps the vars from your app into your engine
 	def self.configure( &block )
