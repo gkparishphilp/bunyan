@@ -98,6 +98,57 @@ module Bunyan
 
 		end
 
+		def update_from_options( options = {} )
+
+			self.user = options[:user] if options[:user].present? && self.user != options[:user]
+
+
+			self.last_campaign_source = options[:campaign_source]
+			self.last_campaign_medium = options[:campaign_medium]
+			self.last_campaign_name = options[:campaign_name]
+			self.last_campaign_term = options[:campaign_term]
+			self.last_campaign_content = options[:campaign_content]
+			self.last_campaign_cost = options[:campaign_cost]
+
+			self.last_partner_source = options[:partner_source]
+			self.last_partner_id = options[:partner_id]
+
+			self.last_referrer_url = options[:referrer_url]
+			self.last_referrer_host = options[:referrer_host]
+			self.last_referrer_path = options[:referrer_path]
+			self.last_referrer_params = options[:referrer_params]
+			if options[:referrer_url].present?
+				begin
+					uri = URI( options[:referrer_url] )
+					self.last_referrer_host ||= uri.host
+					self.last_referrer_path ||= uri.path
+					self.last_referrer_params ||= uri.query
+				rescue URI::InvalidURIError => e
+				end
+			end
+
+			self.last_lander_url = options[:page_url]
+			self.last_lander_host = options[:page_host]
+			self.last_lander_path = options[:page_path]
+			self.last_lander_params = options[:page_params]
+			if options[:page_url].present?
+				begin
+					uri = URI( options[:page_url] )
+					self.last_lander_host ||= uri.host
+					self.last_lander_path ||= uri.path
+					self.last_lander_params ||= uri.query
+				rescue URI::InvalidURIError => e
+				end
+			end
+
+			self.last_landed_at = [ (options[:created_at] || Time.now), self.last_landed_at ].max if self.last_landed_at.present?
+			self.last_landed_at ||= (options[:created_at] || Time.now)
+
+
+			self.save
+
+		end
+
 
 		def to_s
 			user = self.user || 'Anonymous'
