@@ -9,6 +9,27 @@ module Bunyan
 		has_many 	:events
 
 
+		def city
+			self.ip_city
+		end
+		def city=(val)
+			self.ip_city = val
+		end
+
+		def state
+			self.ip_region
+		end
+		def state=(val)
+			self.ip_region = val
+		end
+
+		def country
+			self.ip_country_name
+		end
+		def country=(val)
+			self.ip_country_name = val
+		end
+
 		def self.create_from_options( options )
 			# don't create client if device not cookied
 			raise "No uuid!!!" unless options[:uuid].present?
